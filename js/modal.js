@@ -16,3 +16,24 @@
     refs.modal.classList.toggle("відкрито");
   }
 })();
+
+
+(() => {
+  const backdrop = document.querySelector('[data-modal]');
+  const openBtn = document.querySelector('[data-modal-open]');
+  const closeBtn = document.querySelector('[data-modal-close]');
+
+  const open = () => {
+    backdrop.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+  const close = () => {
+    backdrop.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  openBtn?.addEventListener('click', open);
+  closeBtn?.addEventListener('click', close);
+  backdrop?.addEventListener('click', (e) => { if (e.target === backdrop) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && backdrop.classList.contains('is-open')) close(); });
+})();
